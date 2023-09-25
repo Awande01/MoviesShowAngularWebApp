@@ -1,0 +1,96 @@
+<nav class="navbar navbar-expand-sm bg-light navbar-dark mb-5" navigation>
+  <ul class="navbar-nav">
+
+    <li class="nav-item">
+      <button (click)="searchPage()" class="m-1 btn btn-light btn-outline-primary" Button>Search Show</button>
+    </li>
+    <li class="nav-item">
+      <button (click)="logout()" class="m-1 btn btn-light btn-outline-primary" Button>Logout</button>
+    </li>
+  </ul>
+</nav>
+<div>
+<h3 class="d-flex justify-content-center mb-5"  >Your favorite TV shows....mark all Watched shows</h3>
+<table class="table table-striped">
+  <thead>
+    <tr>
+      <th>Title</th>
+      <th>Type</th>
+      <th>Year</th>
+      <th>Season</th>
+      <th>Episode</th>
+      <th>TimeInMinutes</th>
+      <th>Poster</th>
+      <th>Watched </th>
+      <th>View Next Episode</th>
+      <th>Delete</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr *ngFor="let show of showList">
+      <td>{{show.title}}</td>
+      <td>{{show.type}}</td>
+      <td>{{show.year}}</td>
+      <td>{{show.season}}</td>
+      <td>{{show.episode}}</td>
+      <td>{{show.runningTimeInMinutes}}</td>
+      <td> <img width="100px" height="150px" [src]="show.imageUrl" /></td>
+      <td>{{show.isWatched }}</td>
+      <td>
+        <button type="button" class="btn btn-outline-success" data-bs-toggle="modal" data-bs-target="#exampleModal"
+          (click)="view(show.nextEpisodeId)" data-backdrop="static" data-keyboard="false">
+          <svg xmlns="http://www.w3.org/2000/svg" width="2em" height="2em" viewBox="0 0 576 512"><!--! Font Awesome Free 6.4.2 by @fontawesome - https://fontawesome.com License - https://fontawesome.com/license (Commercial License) Copyright 2023 Fonticons, Inc. --><path d="M288 80c-65.2 0-118.8 29.6-159.9 67.7C89.6 183.5 63 226 49.4 256c13.6 30 40.2 72.5 78.6 108.3C169.2 402.4 222.8 432 288 432s118.8-29.6 159.9-67.7C486.4 328.5 513 286 526.6 256c-13.6-30-40.2-72.5-78.6-108.3C406.8 109.6 353.2 80 288 80zM95.4 112.6C142.5 68.8 207.2 32 288 32s145.5 36.8 192.6 80.6c46.8 43.5 78.1 95.4 93 131.1c3.3 7.9 3.3 16.7 0 24.6c-14.9 35.7-46.2 87.7-93 131.1C433.5 443.2 368.8 480 288 480s-145.5-36.8-192.6-80.6C48.6 356 17.3 304 2.5 268.3c-3.3-7.9-3.3-16.7 0-24.6C17.3 208 48.6 156 95.4 112.6zM288 336c44.2 0 80-35.8 80-80s-35.8-80-80-80c-.7 0-1.3 0-2 0c1.3 5.1 2 10.5 2 16c0 35.3-28.7 64-64 64c-5.5 0-10.9-.7-16-2c0 .7 0 1.3 0 2c0 44.2 35.8 80 80 80zm0-208a128 128 0 1 1 0 256 128 128 0 1 1 0-256z"/></svg>
+        </button>
+      </td>
+      <td>
+      <button type="button" class="btn btn-outline-success" (click)="deleteShow(show.showId)">
+        <svg width="1em" width="2em" height="2em" viewBox="0 0 16 16" class="bi bi-trash-fill" fill="currentColor"
+          xmlns="http://www.w3.org/2000/svg">
+          <path fill-rule="evenodd"
+            d="M2.5 1a1 1 0 0 0-1 1v1a1 1 0 0 0 1 1H3v9a2 2 0 0 0 2 2h6a2 2 0 0 0 2-2V4h.5a1 1 0 0 0 1-1V2a1 1 0 0 0-1-1H10a1 1 0 0 0-1-1H7a1 1 0 0 0-1 1H2.5zm3 4a.5.5 0 0 1 .5.5v7a.5.5 0 0 1-1 0v-7a.5.5 0 0 1 .5-.5zM8 5a.5.5 0 0 1 .5.5v7a.5.5 0 0 1-1 0v-7A.5.5 0 0 1 8 5zm3 .5a.5.5 0 0 0-1 0v7a.5.5 0 0 0 1 0v-7z" />
+        </svg>
+      </button>
+      </td>
+    </tr>
+  </tbody>
+</table>
+<div class="modal fade" id="exampleModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel"
+  aria-hidden="true">
+  <div class="modal-dialog modal-dialog-centered modal-xl" role="document">
+    <div class="modal-content">
+      <div class="modal-header">
+        <h5 class="modal-title" id="exampleModalLabel">{{ModalTitle}}</h5>
+        <button type="button" class="close" data-bs-dismiss="modal" aria-label="Close" (click)="closeClick()">
+          <span aria-hidden="true">&times;</span>
+        </button>
+      </div>
+      <div class="modal-body">
+        <div *ngIf="ActivateViewComp">
+          <table class="table table-striped">
+            <thead>
+              <tr>
+                <th>Title</th>
+                <th>Type</th>
+                <th>Year</th>
+                <th>TimeInMinutes</th>
+                <th>Poster</th>
+
+              </tr>
+            </thead>
+            <tbody>
+              <tr *ngFor="let response of responseList">
+                <td>{{response.title}}</td>
+                <td>{{response.titleType}}</td>
+                <td>{{response.year}}</td>
+                <td>{{response.runningTimeInMinutes}}</td>
+                <td> <img width="100px" height="150px" [src]="response.image.url" /></td>
+
+              </tr>
+            </tbody>
+          </table>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+

@@ -1,0 +1,49 @@
+
+<div>
+    <div class="submit-form">
+      <div >
+        <div class="row">
+            <div class="col-4"></div>
+            <div class="col-4">
+              <div class="form-group">
+                <label for="username">Username</label>
+                <input
+                  type="text"
+                  class="form-control"
+                  id="username"
+                  required
+                  [(ngModel)]="username"
+                  name="username"
+                />
+              </div>
+            </div>
+            <div class="col-4"></div>
+        </div>
+        <div class="row">
+          <div class="col-4"></div>
+          <div class="col-4">
+            <div class="form-group">
+              <label for="password">Password</label>
+              <input
+                class="form-control"
+                id="password"
+                required
+                [(ngModel)]="password"
+                name="password"
+              />
+            </div>
+          </div>
+          <div class="col-4"></div>
+      </div>
+<div class="row">
+  <div class="col-4">
+
+  </div>
+  <div class="col-4  mt-4">
+    <button (click)="getUserProfile()" class="btn btn-success">Submit</button>
+  </div>
+  <div class="col-4"></div>
+</div>
+      </div>
+    </div>
+  </div>
