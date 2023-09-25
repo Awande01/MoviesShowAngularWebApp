@@ -83,8 +83,8 @@
                 <td>{{response.titleType}}</td>
                 <td>{{response.year}}</td>
                 <td>{{response.runningTimeInMinutes}}</td>
-                <td> <img width="100px" height="150px" [src]="response.image.url" /></td>
-
+                <td *ngIf="response.image.url != ''"> <img width="100px" height="150px" [src]="response.image.url" /></td>
+                <td *ngIf="response.image.url == ''"> <img width="100px" height="150px" [src]="response.parentTitle.image.url" /></td>
               </tr>
             </tbody>
           </table>
