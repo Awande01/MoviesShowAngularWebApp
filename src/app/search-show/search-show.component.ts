@@ -46,7 +46,10 @@ export class SearchShowComponent implements OnInit {
         return;
       }
       alert(data);
-      this.router.navigate([`userShows/${this.route.snapshot.params["id"]}`]);
+      if(data == `${show.title} saved successfully`)
+      {
+        this.router.navigate([`userShows/${this.route.snapshot.params["id"]}`]);
+      }
     });
    }
 
