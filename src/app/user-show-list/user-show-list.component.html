@@ -35,7 +35,7 @@
       <td>{{show.episode}}</td>
       <td>{{show.runningTimeInMinutes}}</td>
       <td> <img width="100px" height="150px" [src]="show.imageUrl" /></td>
-      <td>{{show.isWatched }}</td>
+      <td><input type="checkbox" [(ngModel)]="show.isWatched" (change)="checkValue(show.isWatched?'A':'B',show.showId)" /></td>
       <td>
         <button type="button" class="btn btn-outline-success" data-bs-toggle="modal" data-bs-target="#exampleModal"
           (click)="view(show.nextEpisodeId)" data-backdrop="static" data-keyboard="false">

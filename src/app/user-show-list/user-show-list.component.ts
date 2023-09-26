@@ -13,6 +13,7 @@ export class UserShowListComponent implements OnInit {
 showList? :ShowList[];
 ModalTitle = "";
 ActivateViewComp: boolean = false;
+isWatched: boolean = false;
 
 responseList?: SearchResponse[];
   constructor(private router : Router, private showService : ShowService,private route : ActivatedRoute,private searchShowService: SearchShowService) { }
@@ -29,12 +30,11 @@ responseList?: SearchResponse[];
         return;
       }
       this.showList = data;
-console.log(this.showList);
+
     });
    }
 
    deleteShow(showId: any): void{
-    console.log(showId);
     this.showService.delete(showId)
     .subscribe(data => {
       if(data == null){
@@ -49,7 +49,7 @@ console.log(this.showList);
    updateShows(showId: any,isWatched: any): void{
     this.showService.update(isWatched, showId)
     .subscribe(data => {
-      if(data == null && data == false){
+      if(data == null || data == false){
         alert("error updating show");
         return;
       }
@@ -89,5 +89,8 @@ console.log(this.showList);
     this.ActivateViewComp = false;
 
   }
-
+  checkValue(event: any,showId: any){
+    this.isWatched = event =='A'? true : false;
+    this.updateShows(showId,this.isWatched);
+ }
 }

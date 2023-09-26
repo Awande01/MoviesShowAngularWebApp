@@ -29,7 +29,6 @@ export class ShowService {
   update(isWatched: any, id: any): Observable<any>{
     return this.http.put(`${this.apiUrl}?showId=${id}&isWatched=${isWatched}`,'');
   }
-  
   delete(id: number): Observable<any> {
     return this.http.delete(`${this.apiUrl}/${id}`);
   }
